@@ -15,6 +15,7 @@
 		84D9BC4A1EAE521600CCED2D /* SmashTagTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D9BC491EAE521600CCED2D /* SmashTagTests.swift */; };
 		84D9BC551EAE521600CCED2D /* SmashTagUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D9BC541EAE521600CCED2D /* SmashTagUITests.swift */; };
 		84D9BC631EAE526E00CCED2D /* TweetTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D9BC621EAE526E00CCED2D /* TweetTableViewController.swift */; };
+		84D9BC6A1EAE5DDE00CCED2D /* Twitter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84D9BC691EAE5DDE00CCED2D /* Twitter.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +50,7 @@
 		84D9BC541EAE521600CCED2D /* SmashTagUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmashTagUITests.swift; sourceTree = "<group>"; };
 		84D9BC561EAE521600CCED2D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		84D9BC621EAE526E00CCED2D /* TweetTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TweetTableViewController.swift; sourceTree = "<group>"; };
+		84D9BC691EAE5DDE00CCED2D /* Twitter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Twitter.framework; path = "../../../Downloads/Twitter/build/Debug-iphoneos/Twitter.framework"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +58,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				84D9BC6A1EAE5DDE00CCED2D /* Twitter.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -83,6 +86,7 @@
 				84D9BC481EAE521600CCED2D /* SmashTagTests */,
 				84D9BC531EAE521600CCED2D /* SmashTagUITests */,
 				84D9BC321EAE521600CCED2D /* Products */,
+				84D9BC661EAE5D3C00CCED2D /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -126,6 +130,14 @@
 				84D9BC561EAE521600CCED2D /* Info.plist */,
 			);
 			path = SmashTagUITests;
+			sourceTree = "<group>";
+		};
+		84D9BC661EAE5D3C00CCED2D /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				84D9BC691EAE5DDE00CCED2D /* Twitter.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
