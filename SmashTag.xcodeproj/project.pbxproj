@@ -14,6 +14,7 @@
 		84D9BC3F1EAE521600CCED2D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 84D9BC3D1EAE521600CCED2D /* LaunchScreen.storyboard */; };
 		84D9BC4A1EAE521600CCED2D /* SmashTagTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D9BC491EAE521600CCED2D /* SmashTagTests.swift */; };
 		84D9BC551EAE521600CCED2D /* SmashTagUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D9BC541EAE521600CCED2D /* SmashTagUITests.swift */; };
+		84D9BC631EAE526E00CCED2D /* TweetTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D9BC621EAE526E00CCED2D /* TweetTableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +48,7 @@
 		84D9BC501EAE521600CCED2D /* SmashTagUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SmashTagUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		84D9BC541EAE521600CCED2D /* SmashTagUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmashTagUITests.swift; sourceTree = "<group>"; };
 		84D9BC561EAE521600CCED2D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		84D9BC621EAE526E00CCED2D /* TweetTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TweetTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,6 +102,7 @@
 				84D9BC341EAE521600CCED2D /* AppDelegate.swift */,
 				84D9BC361EAE521600CCED2D /* ViewController.swift */,
 				84D9BC381EAE521600CCED2D /* Main.storyboard */,
+				84D9BC621EAE526E00CCED2D /* TweetTableViewController.swift */,
 				84D9BC3B1EAE521600CCED2D /* Assets.xcassets */,
 				84D9BC3D1EAE521600CCED2D /* LaunchScreen.storyboard */,
 				84D9BC401EAE521600CCED2D /* Info.plist */,
@@ -259,6 +262,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				84D9BC631EAE526E00CCED2D /* TweetTableViewController.swift in Sources */,
 				84D9BC371EAE521600CCED2D /* ViewController.swift in Sources */,
 				84D9BC351EAE521600CCED2D /* AppDelegate.swift in Sources */,
 			);
