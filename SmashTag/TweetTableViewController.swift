@@ -24,31 +24,59 @@
         }
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    private var twitterRequest: Twitter.Request? {
+        if let query = searchText, !query.isEmpty {
+            return Twitter.Request(search: query + " -filter:retweets", count: 100)
+        }
+        return nil
     }
     
-    // MARK: - UITableViewDataSource
+    private var lastTwitterRequest: Twitter.Request?
+    
+    private struct Storyboard {
+        static let TweetCellIdentifier = "Tweet"
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        tableView.estimatedRowHeight = tableView.rowHeight
+        tableView.rowHeight = UITableViewAutomaticDimension
+        searchText = "#thoughtworks"
+    }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 0
+        return tweets.count
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return 0
+        return tweets[section].count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: Storyboard.TweetCellIdentifier, for: indexPath)
         
-        //         Configure the cell...
+        let tweet = tweets[indexPath.section][indexPath.row]
+        if let tweetCell = cell as? TweetTableViewCell {
+            tweetCell.tweet = tweet
+        }
         
         return cell
     }
     
-    private func searchForTweets() {}
+    private func searchForTweets() {
+        if let request = twitterRequest {
+            lastTwitterRequest = request
+            request.fetchTweets { [weak self] newTweets in
+                DispatchQueue.main.async() {
+                    if request == self?.lastTwitterRequest {
+                        if !newTweets.isEmpty {
+                            self?.tweets.insert(newTweets, at: 0)
+                        }
+                    }
+                }
+            }
+        }
+    }
     
     
     /*
