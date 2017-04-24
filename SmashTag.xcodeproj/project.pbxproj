@@ -15,7 +15,6 @@
 		84D9BC4A1EAE521600CCED2D /* SmashTagTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D9BC491EAE521600CCED2D /* SmashTagTests.swift */; };
 		84D9BC551EAE521600CCED2D /* SmashTagUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D9BC541EAE521600CCED2D /* SmashTagUITests.swift */; };
 		84D9BC631EAE526E00CCED2D /* TweetTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D9BC621EAE526E00CCED2D /* TweetTableViewController.swift */; };
-		84D9BC651EAE538E00CCED2D /* Twitter in Resources */ = {isa = PBXBuildFile; fileRef = 84D9BC641EAE538E00CCED2D /* Twitter */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,7 +49,6 @@
 		84D9BC541EAE521600CCED2D /* SmashTagUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmashTagUITests.swift; sourceTree = "<group>"; };
 		84D9BC561EAE521600CCED2D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		84D9BC621EAE526E00CCED2D /* TweetTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TweetTableViewController.swift; sourceTree = "<group>"; };
-		84D9BC641EAE538E00CCED2D /* Twitter */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Twitter; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,7 +79,6 @@
 		84D9BC281EAE521600CCED2D = {
 			isa = PBXGroup;
 			children = (
-				84D9BC641EAE538E00CCED2D /* Twitter */,
 				84D9BC331EAE521600CCED2D /* SmashTag */,
 				84D9BC481EAE521600CCED2D /* SmashTagTests */,
 				84D9BC531EAE521600CCED2D /* SmashTagUITests */,
@@ -240,7 +237,6 @@
 			files = (
 				84D9BC3F1EAE521600CCED2D /* LaunchScreen.storyboard in Resources */,
 				84D9BC3C1EAE521600CCED2D /* Assets.xcassets in Resources */,
-				84D9BC651EAE538E00CCED2D /* Twitter in Resources */,
 				84D9BC3A1EAE521600CCED2D /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -513,6 +509,7 @@
 				84D9BC5B1EAE521600CCED2D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		84D9BC5C1EAE521600CCED2D /* Build configuration list for PBXNativeTarget "SmashTagTests" */ = {
 			isa = XCConfigurationList;
@@ -521,6 +518,7 @@
 				84D9BC5E1EAE521600CCED2D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		84D9BC5F1EAE521600CCED2D /* Build configuration list for PBXNativeTarget "SmashTagUITests" */ = {
 			isa = XCConfigurationList;
@@ -529,6 +527,7 @@
 				84D9BC611EAE521600CCED2D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
