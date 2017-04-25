@@ -37,6 +37,15 @@
         return true
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let identifier = segue.identifier {
+            switch identifier {
+            case "Show Mentions": print ("getting mentions segue ready")
+            default: break
+            }
+        }
+    }
+     
     private var twitterRequest: Twitter.Request? {
         if let query = searchText, !query.isEmpty {
             return Twitter.Request(search: query + " -filter:retweets", count: 100)
