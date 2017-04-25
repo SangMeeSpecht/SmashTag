@@ -23,6 +23,12 @@ class TweetTableViewCell: UITableViewCell {
     
     private let oneDayOld: Double = 24 * 60 * 60
     
+    private let mentionColors = [
+        "hashtags": UIColor.magenta,
+        "urls": UIColor.purple,
+        "userMentions": UIColor.green
+    ]
+    
     private func updateUI() {
         removeExistingTweetInfo()
         populateWithNewTweetInfo()
@@ -40,17 +46,13 @@ class TweetTableViewCell: UITableViewCell {
             setTextLabel(forTweet: tweet)
             setScreenNameLabel(forTweet: tweet)
             setProfileImage(forTweet: tweet)
-            setCreatedLabel(forTweet: tweet)
+            tweetCreatedLabel?.text = timeCreated(forTweet: tweet)
         }
     }
     
     private func setTextLabel(forTweet tweet: Twitter.Tweet) {
-        tweetTextLabel?.text = tweet.text
-        if tweetTextLabel?.text != nil {
-            for _ in tweet.media {
-                tweetTextLabel.text! += "  📷"
-            }
-        }
+        tweetTextLabel?.attributedText = coloredMentions(inTweet: tweet)
+        addCameraIconForImages(inTweet: tweet)
     }
     
     private func setScreenNameLabel(forTweet tweet: Twitter.Tweet) {
@@ -65,7 +67,7 @@ class TweetTableViewCell: UITableViewCell {
         }
     }
     
-    private func setCreatedLabel(forTweet tweet: Twitter.Tweet) {
+    private func timeCreated(forTweet tweet: Twitter.Tweet) -> String {
         let formatter = DateFormatter()
         
         if NSDate().timeIntervalSince(tweet.created) > oneDayOld {
@@ -74,6 +76,31 @@ class TweetTableViewCell: UITableViewCell {
             formatter.timeStyle = .short
         }
         
-        tweetCreatedLabel?.text = formatter.string(from: tweet.created)
+        return formatter.string(from: tweet.created)
+    }
+    
+    private func coloredMentions(inTweet tweet: Twitter.Tweet) -> NSMutableAttributedString {
+        let attributedString = NSMutableAttributedString(string: tweet.text)
+        
+        attributedString.setMentionsColor(mentions: tweet.hashtags, color: mentionColors["hashtags"]!)
+        attributedString.setMentionsColor(mentions: tweet.urls, color: mentionColors["urls"]!)
+        attributedString.setMentionsColor(mentions: tweet.userMentions, color: mentionColors["userMentions"]!)
+        
+        return attributedString
+    }
+    
+    private func addCameraIconForImages(inTweet tweet: Twitter.Tweet) {
+        for _ in tweet.media {
+            tweetTextLabel.text! += "  📷"
+        }
+    }
+}
+
+
+private extension NSMutableAttributedString {
+    func setMentionsColor(mentions: [Mention], color: UIColor) {
+        for mention in mentions {
+            addAttribute(NSForegroundColorAttributeName, value: color, range: mention.nsrange)
+        }
     }
 }
