@@ -7,38 +7,106 @@
 //
 
 import UIKit
+import Twitter
 
 class MentionsTableViewController: UITableViewController {
     let mentionCategories = ["Images", "Hashtags", "Users", "URLs"]
+    
+    private var mentions: [Mentions] = []
+    
+    private struct Mentions {
+        var category: String
+        var data: [IndividualMentions]
+    }
+    
+    private enum IndividualMentions {
+        case Keyword(String)
+        case Image(URL, Double)
+    }
+    
+    var tweet: Twitter.Tweet? {
+        didSet {
+            if let images = tweet?.media {
+                if images.count > 0 {
+                    mentions.append(Mentions(category: "Images", data: images.map { IndividualMentions.Image($0.url, $0.aspectRatio) } ))
+                }
+            }
+            
+            if let hashtags = tweet?.hashtags {
+                if hashtags.count > 0 {
+                    mentions.append(Mentions(category: "Hashtags", data: hashtags.map { IndividualMentions.Keyword($0.keyword) } ))
+                }
+            }
+            
+            if let users = tweet?.userMentions {
+                if users.count > 0 {
+                    mentions.append(Mentions(category: "Users", data: users.map { IndividualMentions.Keyword($0.keyword) } ))
+                }
+            }
+            
+            if let urls = tweet?.urls {
+                if urls.count > 0 {
+                    mentions.append(Mentions(category: "URLs", data: urls.map { IndividualMentions.Keyword($0.keyword) } ))
+                }
+            }
+        }
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableView.estimatedRowHeight = tableView.rowHeight
-        tableView.rowHeight = UITableViewAutomaticDimension
+//        tableView.estimatedRowHeight = tableView.rowHeight
+//        tableView.rowHeight = UITableViewAutomaticDimension
     }
 
-
     override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return mentionCategories.count
+        return mentions.count
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return 3
+        return mentions[section].data.count
     }
 
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return mentionCategories[section]
+        return mentions[section].category
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Mention", for: indexPath)
-
+        let currentMention = mentions[indexPath.section].data[indexPath.row]
+        
+        switch currentMention {
+        case .Keyword(let keyword):
+            cell.textLabel?.text = keyword
+        case .Image(let url, _):
+            cell.imageView?.image = fetchImage(forTweet: url)
+        }
         return cell
     }
+    
+//    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+//        return tableView.frame.width / CGFloat((tweet?.media[indexPath.row].aspectRatio)!)
+//    }
+    
+//    fix to not run on main thread!!!
+    private func fetchImage(forTweet imageURL: URL) -> UIImage? {
+        let url = imageURL
+            if let imageData = try? Data(contentsOf: url) {
+                return UIImage(data: imageData)
+            }
+        return nil
+    }
 
-
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        let mention = mentions[indexPath.section].data[indexPath.row]
+        
+        switch mention {
+        case .Image(_, let ratio):
+            return self.view.frame.width / CGFloat(ratio)
+        default:
+            return UITableViewAutomaticDimension
+        }
+    }
+    
     /*
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {

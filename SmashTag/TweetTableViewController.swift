@@ -40,7 +40,13 @@
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let identifier = segue.identifier {
             switch identifier {
-            case "Show Mentions": print ("getting mentions segue ready")
+            case "Show Mentions":
+                if let cell = sender as? TweetTableViewCell {
+                    let indexPath = tableView.indexPath(for: cell)
+                    if let seguedToMVC = segue.destination as? MentionsTableViewController {
+                        seguedToMVC.tweet = tweets[(indexPath?.section)!][(indexPath?.row)!]
+                    }
+                }
             default: break
             }
         }
