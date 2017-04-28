@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8462F26C1EB3EFE400EB648F /* ImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8462F26B1EB3EFE400EB648F /* ImageViewController.swift */; };
 		84C63EAF1EAE9509007A344A /* Twitter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84C63EAE1EAE9509007A344A /* Twitter.framework */; };
 		84C63EB11EAFA9BA007A344A /* MentionsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C63EB01EAFA9BA007A344A /* MentionsTableViewController.swift */; };
 		84D9BC351EAE521600CCED2D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D9BC341EAE521600CCED2D /* AppDelegate.swift */; };
@@ -37,6 +38,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		8462F26B1EB3EFE400EB648F /* ImageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageViewController.swift; sourceTree = "<group>"; };
 		84C63EAE1EAE9509007A344A /* Twitter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Twitter.framework; path = "../../../Library/Developer/Xcode/DerivedData/SmashTagWorkspace-akpznugoeckplrdyurkhicwezubd/Build/Products/Debug-iphoneos/Twitter.framework"; sourceTree = "<group>"; };
 		84C63EB01EAFA9BA007A344A /* MentionsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MentionsTableViewController.swift; sourceTree = "<group>"; };
 		84D9BC311EAE521600CCED2D /* SmashTag.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SmashTag.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -105,6 +107,7 @@
 		84D9BC331EAE521600CCED2D /* SmashTag */ = {
 			isa = PBXGroup;
 			children = (
+				8462F26B1EB3EFE400EB648F /* ImageViewController.swift */,
 				84D9BC341EAE521600CCED2D /* AppDelegate.swift */,
 				84D9BC381EAE521600CCED2D /* Main.storyboard */,
 				84D9BC6F1EAE730500CCED2D /* TweetTableViewCell.swift */,
@@ -279,6 +282,7 @@
 			files = (
 				84D9BC631EAE526E00CCED2D /* TweetTableViewController.swift in Sources */,
 				84D9BC351EAE521600CCED2D /* AppDelegate.swift in Sources */,
+				8462F26C1EB3EFE400EB648F /* ImageViewController.swift in Sources */,
 				84D9BC701EAE730500CCED2D /* TweetTableViewCell.swift in Sources */,
 				84C63EB11EAFA9BA007A344A /* MentionsTableViewController.swift in Sources */,
 			);

@@ -80,7 +80,7 @@ class MentionsTableViewController: UITableViewController {
             cell.textLabel?.text = keyword
             return cell
         case .Image(let url, _):
-            let cell = tableView.dequeueReusableCell(withIdentifier: "Mention", for: indexPath)
+            let cell = tableView.dequeueReusableCell(withIdentifier: "Image", for: indexPath)
             cell.imageView?.image = fetchImage(forTweet: url)
             return cell
         }
@@ -96,10 +96,33 @@ class MentionsTableViewController: UITableViewController {
                         seguedToMVC.textFieldShouldReturn(seguedToMVC.searchTextField)
                     }
                 }
+            case "Show Image":
+                if let cell = sender as? UITableViewCell {
+                    if let seguedToMVC = segue.destination as? ImageViewController {
+                        seguedToMVC.navigationItem.title = "Image"
+                    }
+                }
             default: break
             }
         }
     }
+    
+    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
+        if identifier == "Search", let cell = sender as? UITableViewCell {
+            if let url = cell.textLabel?.text, url.hasPrefix("http") {
+                UIApplication.shared.open(URL(string: url)!, options: [:], completionHandler: nil)
+                return false
+            }
+        }
+        return true
+    }
+    
+//    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
+//        if identifier == "Show Graph" && model.isPartialResult {
+//            return false
+//        }
+//        return true
+//    }
     
 
     
