@@ -104,7 +104,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WAX-Pq-g1x" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1004" y="128.18590704647679"/>
+            <point key="canvasLocation" x="465" y="45"/>
         </scene>
         <!--Mentions Table View Controller-->
         <scene sceneID="bzH-GU-k2F">
@@ -122,6 +122,9 @@
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="epT-RU-bab" kind="show" identifier="Search" id="L5d-Jl-sFb"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -132,7 +135,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zhZ-1z-LwE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1878" y="132"/>
+            <point key="canvasLocation" x="1254" y="46"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="ewu-X5-viV">
@@ -150,7 +153,10 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="H7d-z3-OSS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="64.799999999999997" y="128.18590704647679"/>
+            <point key="canvasLocation" x="-338" y="47"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="L5d-Jl-sFb"/>
+    </inferredMetricsTieBreakers>
 </document>

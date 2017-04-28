@@ -54,6 +54,7 @@ class MentionsTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationItem.title = "Mentions"
 //        tableView.estimatedRowHeight = tableView.rowHeight
 //        tableView.rowHeight = UITableViewAutomaticDimension
     }
@@ -71,17 +72,36 @@ class MentionsTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Mention", for: indexPath)
         let currentMention = mentions[indexPath.section].data[indexPath.row]
         
         switch currentMention {
         case .Keyword(let keyword):
+            let cell = tableView.dequeueReusableCell(withIdentifier: "Mention", for: indexPath)
             cell.textLabel?.text = keyword
+            return cell
         case .Image(let url, _):
+            let cell = tableView.dequeueReusableCell(withIdentifier: "Mention", for: indexPath)
             cell.imageView?.image = fetchImage(forTweet: url)
+            return cell
         }
-        return cell
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let identifier = segue.identifier {
+            switch identifier {
+            case "Search":
+                if let cell = sender as? UITableViewCell {
+                    if let seguedToMVC = segue.destination as? TweetTableViewController {
+                        seguedToMVC.searchTextField.text = cell.textLabel?.text
+                        seguedToMVC.textFieldShouldReturn(seguedToMVC.searchTextField)
+                    }
+                }
+            default: break
+            }
+        }
+    }
+    
+
     
 //    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
 //        return tableView.frame.width / CGFloat((tweet?.media[indexPath.row].aspectRatio)!)
