@@ -12,8 +12,6 @@ import Twitter
 class MentionsTableViewController: UITableViewController {
     private var mentions: [Mentions] = []
     
-    private var imageURL : URL?
-    
     private struct Mentions {
         var category: String
         var data: [IndividualMentions]
@@ -29,8 +27,6 @@ class MentionsTableViewController: UITableViewController {
             if let images = tweet?.media {
                 if images.count > 0 {
                     mentions.append(Mentions(category: "Images", data: images.map { IndividualMentions.Image($0.url, $0.aspectRatio) } ))
-                    
-                    imageURL = images[0].url
                 }
             }
             
@@ -57,8 +53,6 @@ class MentionsTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.title = "Mentions"
-//        tableView.estimatedRowHeight = tableView.rowHeight
-//        tableView.rowHeight = UITableViewAutomaticDimension
     }
 
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -82,8 +76,8 @@ class MentionsTableViewController: UITableViewController {
             cell.textLabel?.text = keyword
             return cell
         case .Image(let url, _):
-            let cell = tableView.dequeueReusableCell(withIdentifier: "Image", for: indexPath)
-            cell.imageView?.image = fetchImage(forTweet: url)
+            let cell = tableView.dequeueReusableCell(withIdentifier: "Image", for: indexPath) as! ImageTableViewCell
+            cell.tweetURL = url
             return cell
         }
     }
@@ -99,10 +93,10 @@ class MentionsTableViewController: UITableViewController {
                     }
                 }
             case "Show Image":
-                if let cell = sender as? UITableViewCell {
+                if let cell = sender as? ImageTableViewCell {
                     if let seguedToMVC = segue.destination as? ImageViewController {
                         seguedToMVC.navigationItem.title = "Image"
-                        seguedToMVC.imageURL = imageURL
+                        seguedToMVC.imageURL = cell.tweetURL
                     }
                 }
             default: break
@@ -120,14 +114,6 @@ class MentionsTableViewController: UITableViewController {
         return true
     }
     
-//    fix to not run on main thread!!!
-    private func fetchImage(forTweet imageURL: URL) -> UIImage? {
-        let url = imageURL
-            if let imageData = try? Data(contentsOf: url) {
-                return UIImage(data: imageData)
-            }
-        return nil
-    }
 
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         let mention = mentions[indexPath.section].data[indexPath.row]

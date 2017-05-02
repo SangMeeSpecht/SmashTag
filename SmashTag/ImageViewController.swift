@@ -8,11 +8,13 @@
 
 import UIKit
 
-class ImageViewController: UIViewController {
+class ImageViewController: UIViewController, UIScrollViewDelegate {
     var imageURL: URL? {
         didSet {
             image = nil
-            fetchImage()
+            if view.window != nil {
+                fetchImage()
+            }
         }
     }
 
@@ -21,6 +23,9 @@ class ImageViewController: UIViewController {
     @IBOutlet weak var imageScrollView: UIScrollView! {
         didSet {
             imageScrollView.contentSize = mentionImage.frame.size
+            imageScrollView.delegate = self
+            imageScrollView.minimumZoomScale = 0.03
+            imageScrollView.maximumZoomScale = 5.0
         }
     }
     
@@ -35,16 +40,31 @@ class ImageViewController: UIViewController {
         }
     }
     
+    func viewForZooming(in scrollView: UIScrollView) -> UIView? {
+        return mentionImage
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-//        imageURL = URL(string: "http://www.findcatnames.com/wp-content/uploads/2017/01/tabby-cat-names.jpg")
         imageScrollView.addSubview(mentionImage)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if image == nil {
+            fetchImage()
+        }
     }
     
     private func fetchImage() {
         if let url = imageURL {
-            if let imageData = try? Data(contentsOf: url) {
-                image = UIImage(data: imageData)
+            DispatchQueue.global(qos: .userInitiated).async { [weak self] in
+                let urlContents = try? Data(contentsOf: url)
+                if let imageData = urlContents, url == self?.imageURL {
+                    DispatchQueue.main.async {
+                        self?.image = UIImage(data: imageData)
+                    }
+                }
             }
         }
     }

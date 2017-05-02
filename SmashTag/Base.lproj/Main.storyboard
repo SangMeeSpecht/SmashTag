@@ -126,14 +126,26 @@
                                     <segue destination="epT-RU-bab" kind="show" identifier="Search" id="L5d-Jl-sFb"/>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Image" id="auo-Fv-CvT">
-                                <rect key="frame" x="0.0" y="72" width="375" height="44"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Image" rowHeight="154" id="auo-Fv-CvT" customClass="ImageTableViewCell" customModule="SmashTag" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="72" width="375" height="154"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="auo-Fv-CvT" id="Z0n-Vo-bq6">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="154"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="GxS-Hi-kcs">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="154"/>
+                                        </imageView>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="GxS-Hi-kcs" firstAttribute="leading" secondItem="Z0n-Vo-bq6" secondAttribute="leading" id="Eln-dZ-HgL"/>
+                                        <constraint firstItem="GxS-Hi-kcs" firstAttribute="centerY" secondItem="Z0n-Vo-bq6" secondAttribute="centerY" id="IDC-DD-zX5"/>
+                                        <constraint firstItem="GxS-Hi-kcs" firstAttribute="top" secondItem="Z0n-Vo-bq6" secondAttribute="top" id="RHg-Ey-O12"/>
+                                        <constraint firstAttribute="trailing" secondItem="GxS-Hi-kcs" secondAttribute="trailing" id="oSH-WN-O7p"/>
+                                    </constraints>
                                 </tableViewCellContentView>
                                 <connections>
+                                    <outlet property="tweetImage" destination="GxS-Hi-kcs" id="7L0-M1-Cbq"/>
                                     <segue destination="ufk-PW-ZGq" kind="show" identifier="Show Image" id="oZ8-bT-yP2"/>
                                 </connections>
                             </tableViewCell>
@@ -146,7 +158,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zhZ-1z-LwE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1254" y="46"/>
+            <point key="canvasLocation" x="1253.5999999999999" y="45.42728635682159"/>
         </scene>
         <!--Image View Controller-->
         <scene sceneID="ViH-9K-kjt">
