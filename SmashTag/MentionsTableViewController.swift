@@ -10,9 +10,9 @@ import UIKit
 import Twitter
 
 class MentionsTableViewController: UITableViewController {
-    let mentionCategories = ["Images", "Hashtags", "Users", "URLs"]
-    
     private var mentions: [Mentions] = []
+    
+    private var imageURL : URL?
     
     private struct Mentions {
         var category: String
@@ -29,6 +29,8 @@ class MentionsTableViewController: UITableViewController {
             if let images = tweet?.media {
                 if images.count > 0 {
                     mentions.append(Mentions(category: "Images", data: images.map { IndividualMentions.Image($0.url, $0.aspectRatio) } ))
+                    
+                    imageURL = images[0].url
                 }
             }
             
@@ -100,6 +102,7 @@ class MentionsTableViewController: UITableViewController {
                 if let cell = sender as? UITableViewCell {
                     if let seguedToMVC = segue.destination as? ImageViewController {
                         seguedToMVC.navigationItem.title = "Image"
+                        seguedToMVC.imageURL = imageURL
                     }
                 }
             default: break
