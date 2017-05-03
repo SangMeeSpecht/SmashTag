@@ -29,7 +29,7 @@ class MentionsTableViewController: UITableViewController {
                     mentions.append(Mentions(category: "Images", data: images.map { IndividualMentions.Image($0.url, $0.aspectRatio) } ))
                 }
             }
-            
+              
             if let hashtags = tweet?.hashtags {
                 if hashtags.count > 0 {
                     mentions.append(Mentions(category: "Hashtags", data: hashtags.map { IndividualMentions.Keyword($0.keyword) } ))
@@ -105,7 +105,7 @@ class MentionsTableViewController: UITableViewController {
     }
     
     override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
-        if identifier == "Search", let cell = sender as? UITableViewCell {
+        if identifier == Storyboard.Search, let cell = sender as? UITableViewCell {
             if let url = cell.textLabel?.text, url.hasPrefix("http") {
                 UIApplication.shared.open(URL(string: url)!, options: [:], completionHandler: nil)
                 return false
