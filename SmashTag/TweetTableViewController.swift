@@ -9,6 +9,8 @@
  import UIKit
  import Twitter
  
+ private var history = SearchHistory()
+ 
  class TweetTableViewController: UITableViewController, UITextFieldDelegate {
     var tweets = [Array<Twitter.Tweet>]() {
         didSet {
@@ -21,6 +23,8 @@
             tweets.removeAll()
             searchForTweets()
             title = searchText
+            
+            history.addSearchWord(toHistory: searchText!)
         }
     }
     
@@ -104,24 +108,5 @@
             }
         }
     }
-    
-    private struct SearchHistory {
-        var history: [String]
-        
-        func addSearchWord(toHistory word: String) {
-            if !containsDuplicateWord(inHistory: word) && !historyIsFull() {
-//                
-            }
-        }
-        
-        private func containsDuplicateWord(inHistory word: String) -> Bool {
-            let lowerCaseWord = word.lowercased()
-            return history.contains(lowerCaseWord)
-        }
-        
-        private func historyIsFull() -> Bool {
-            return history.count > 100
-        }
-    }
-    
  }
+ 
