@@ -95,7 +95,7 @@ class MentionsTableViewController: UITableViewController {
             case Storyboard.ShowImage:
                 if let cell = sender as? ImageTableViewCell {
                     if let seguedToMVC = segue.destination as? ImageViewController {
-                        seguedToMVC.navigationItem.title = Storyboard.NavImageTitle
+                        seguedToMVC.navigationItem.title = Storyboard.Image
                         seguedToMVC.imageURL = cell.tweetURL
                     }
                 }
