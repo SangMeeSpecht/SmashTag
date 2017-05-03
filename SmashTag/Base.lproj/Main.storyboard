@@ -204,28 +204,31 @@
                     </tabBar>
                     <connections>
                         <segue destination="C7Y-SV-pQ5" kind="relationship" relationship="viewControllers" id="VWT-WG-LsN"/>
-                        <segue destination="s1H-Ox-wVH" kind="relationship" relationship="viewControllers" id="oyE-EB-iow"/>
+                        <segue destination="S3I-rQ-68D" kind="relationship" relationship="viewControllers" id="oyE-EB-iow"/>
                     </connections>
                 </tabBarController>
             </objects>
             <point key="canvasLocation" x="-1239" y="45"/>
         </scene>
-        <!--Search History-->
+        <!--History-->
         <scene sceneID="7bN-Lg-Y6E">
             <objects>
-                <tableViewController id="s1H-Ox-wVH" sceneMemberID="viewController">
+                <tableViewController id="s1H-Ox-wVH" customClass="SearchHistoryTableViewController" customModule="SmashTag" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="bzt-vY-t6o">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="Sc0-LD-yqC">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="Search Word" selectionStyle="default" indentationWidth="10" reuseIdentifier="Search Word" id="Sc0-LD-yqC">
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Sc0-LD-yqC" id="93Y-iU-eEK">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="epT-RU-bab" kind="show" identifier="Search Word" id="MBz-wg-axn"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -233,17 +236,17 @@
                             <outlet property="delegate" destination="s1H-Ox-wVH" id="A1e-tv-IlB"/>
                         </connections>
                     </tableView>
-                    <tabBarItem key="tabBarItem" title="Search History" id="iVm-bN-hGH"/>
+                    <navigationItem key="navigationItem" title="History" id="TGL-kv-dSv"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="s21-6i-veF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-338" y="-645"/>
+            <point key="canvasLocation" x="465" y="-677"/>
         </scene>
-        <!--Search-->
+        <!--Navigation Controller-->
         <scene sceneID="ewu-X5-viV">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="C7Y-SV-pQ5" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Search" id="v9v-Cc-bgZ"/>
+                    <tabBarItem key="tabBarItem" systemItem="search" id="v9v-Cc-bgZ"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="gO4-MK-Cg0">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -258,8 +261,27 @@
             </objects>
             <point key="canvasLocation" x="-338" y="47"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="um9-f4-RWv">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="S3I-rQ-68D" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" systemItem="history" id="iVm-bN-hGH"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="IPg-2S-XZi">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="s1H-Ox-wVH" kind="relationship" relationship="rootViewController" id="eat-9d-jIz"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="3lT-FQ-dKH" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-338" y="-677"/>
+        </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="ksK-NG-KbU"/>
+        <segue reference="MBz-wg-axn"/>
     </inferredMetricsTieBreakers>
 </document>

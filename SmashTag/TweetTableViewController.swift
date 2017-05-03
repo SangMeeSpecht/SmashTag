@@ -9,8 +9,6 @@
  import UIKit
  import Twitter
  
- private var history = SearchHistory()
- 
  class TweetTableViewController: UITableViewController, UITextFieldDelegate {
     var tweets = [Array<Twitter.Tweet>]() {
         didSet {
@@ -28,6 +26,17 @@
         }
     }
     
+    private var history = SearchHistory()
+    private var lastTwitterRequest: Twitter.Request?
+    
+    private var twitterRequest: Twitter.Request? {
+        if let query = searchText, !query.isEmpty {
+            return Twitter.Request(search: query + " -filter:retweets", count: 100)
+        }
+        return nil
+    }
+    
+    
     @IBOutlet weak var searchTextField: UITextField! {
         didSet {
             searchTextField.delegate = self
@@ -44,7 +53,7 @@
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let identifier = segue.identifier {
             switch identifier {
-            case "Show Mentions":
+            case Storyboard.SegueIdentifier:
                 if let cell = sender as? TweetTableViewCell {
                     let indexPath = tableView.indexPath(for: cell)
                     if let seguedToMVC = segue.destination as? MentionsTableViewController {
@@ -54,19 +63,6 @@
             default: break
             }
         }
-    }
-     
-    private var twitterRequest: Twitter.Request? {
-        if let query = searchText, !query.isEmpty {
-            return Twitter.Request(search: query + " -filter:retweets", count: 100)
-        }
-        return nil
-    }
-    
-    private var lastTwitterRequest: Twitter.Request?
-    
-    private struct Storyboard {
-        static let TweetCellIdentifier = "Tweet"
     }
     
     override func viewDidLoad() {
@@ -107,6 +103,11 @@
                 }
             }
         }
+    }
+    
+    private struct Storyboard {
+        static let TweetCellIdentifier = "Tweet"
+        static let SegueIdentifier = "Show Mentions"
     }
  }
  

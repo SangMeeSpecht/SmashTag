@@ -52,7 +52,7 @@ class MentionsTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationItem.title = "Mentions"
+        navigationItem.title = Storyboard.Mention
     }
 
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -72,11 +72,11 @@ class MentionsTableViewController: UITableViewController {
         
         switch currentMention {
         case .Keyword(let keyword):
-            let cell = tableView.dequeueReusableCell(withIdentifier: "Mention", for: indexPath)
+            let cell = tableView.dequeueReusableCell(withIdentifier: Storyboard.Mention, for: indexPath)
             cell.textLabel?.text = keyword
             return cell
         case .Image(let url, _):
-            let cell = tableView.dequeueReusableCell(withIdentifier: "Image", for: indexPath) as! ImageTableViewCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: Storyboard.Image, for: indexPath) as! ImageTableViewCell
             cell.tweetURL = url
             return cell
         }
@@ -85,17 +85,17 @@ class MentionsTableViewController: UITableViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let identifier = segue.identifier {
             switch identifier {
-            case "Search":
+            case Storyboard.Search:
                 if let cell = sender as? UITableViewCell {
                     if let seguedToMVC = segue.destination as? TweetTableViewController {
                         seguedToMVC.searchTextField.text = cell.textLabel?.text
                         seguedToMVC.textFieldShouldReturn(seguedToMVC.searchTextField)
                     }
                 }
-            case "Show Image":
+            case Storyboard.ShowImage:
                 if let cell = sender as? ImageTableViewCell {
                     if let seguedToMVC = segue.destination as? ImageViewController {
-                        seguedToMVC.navigationItem.title = "Image"
+                        seguedToMVC.navigationItem.title = Storyboard.NavImageTitle
                         seguedToMVC.imageURL = cell.tweetURL
                     }
                 }
@@ -124,5 +124,12 @@ class MentionsTableViewController: UITableViewController {
         default:
             return UITableViewAutomaticDimension
         }
+    }
+    
+    private struct Storyboard {
+        static let Search = "Search"
+        static let ShowImage = "Show Image"
+        static let Image = "Image"
+        static let Mention = "Mention"
     }
 }
