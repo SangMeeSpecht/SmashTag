@@ -11,6 +11,8 @@
 		84B2A45B1EB91FC700B6516B /* ImageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B2A45A1EB91FC700B6516B /* ImageTableViewCell.swift */; };
 		84B2A45F1EB92F5B00B6516B /* SearchHistoryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B2A45E1EB92F5B00B6516B /* SearchHistoryTableViewController.swift */; };
 		84B2A4611EB92FA000B6516B /* SearchHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B2A4601EB92FA000B6516B /* SearchHistory.swift */; };
+		84B2A4671EBCE08500B6516B /* SmashTagModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 84B2A4651EBCE08500B6516B /* SmashTagModel.xcdatamodeld */; };
+		84B2A4841EBCF70400B6516B /* Tweet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B2A4831EBCF70400B6516B /* Tweet.swift */; };
 		84C63EAF1EAE9509007A344A /* Twitter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84C63EAE1EAE9509007A344A /* Twitter.framework */; };
 		84C63EB11EAFA9BA007A344A /* MentionsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C63EB01EAFA9BA007A344A /* MentionsTableViewController.swift */; };
 		84D9BC351EAE521600CCED2D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D9BC341EAE521600CCED2D /* AppDelegate.swift */; };
@@ -45,6 +47,8 @@
 		84B2A45A1EB91FC700B6516B /* ImageTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageTableViewCell.swift; sourceTree = "<group>"; };
 		84B2A45E1EB92F5B00B6516B /* SearchHistoryTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchHistoryTableViewController.swift; sourceTree = "<group>"; };
 		84B2A4601EB92FA000B6516B /* SearchHistory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchHistory.swift; sourceTree = "<group>"; };
+		84B2A4661EBCE08500B6516B /* SmashTagModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = SmashTagModel.xcdatamodel; sourceTree = "<group>"; };
+		84B2A4831EBCF70400B6516B /* Tweet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tweet.swift; sourceTree = "<group>"; };
 		84C63EAE1EAE9509007A344A /* Twitter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Twitter.framework; path = "../../../Library/Developer/Xcode/DerivedData/SmashTagWorkspace-akpznugoeckplrdyurkhicwezubd/Build/Products/Debug-iphoneos/Twitter.framework"; sourceTree = "<group>"; };
 		84C63EB01EAFA9BA007A344A /* MentionsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MentionsTableViewController.swift; sourceTree = "<group>"; };
 		84D9BC311EAE521600CCED2D /* SmashTag.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SmashTag.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -89,6 +93,42 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		84B2A4621EBCC6F400B6516B /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				8462F26B1EB3EFE400EB648F /* ImageViewController.swift */,
+				84D9BC621EAE526E00CCED2D /* TweetTableViewController.swift */,
+				84C63EB01EAFA9BA007A344A /* MentionsTableViewController.swift */,
+				84B2A45E1EB92F5B00B6516B /* SearchHistoryTableViewController.swift */,
+			);
+			name = ViewControllers;
+			sourceTree = "<group>";
+		};
+		84B2A4631EBCC7AB00B6516B /* CustomCells */ = {
+			isa = PBXGroup;
+			children = (
+				84D9BC6F1EAE730500CCED2D /* TweetTableViewCell.swift */,
+				84B2A45A1EB91FC700B6516B /* ImageTableViewCell.swift */,
+			);
+			name = CustomCells;
+			sourceTree = "<group>";
+		};
+		84B2A4641EBCC7D200B6516B /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				84B2A4601EB92FA000B6516B /* SearchHistory.swift */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		84B2A4701EBCF30A00B6516B /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				84B2A4831EBCF70400B6516B /* Tweet.swift */,
+			);
+			name = CoreData;
+			sourceTree = "<group>";
+		};
 		84D9BC281EAE521600CCED2D = {
 			isa = PBXGroup;
 			children = (
@@ -113,18 +153,16 @@
 		84D9BC331EAE521600CCED2D /* SmashTag */ = {
 			isa = PBXGroup;
 			children = (
-				8462F26B1EB3EFE400EB648F /* ImageViewController.swift */,
+				84B2A4701EBCF30A00B6516B /* CoreData */,
+				84B2A4631EBCC7AB00B6516B /* CustomCells */,
+				84B2A4621EBCC6F400B6516B /* ViewControllers */,
+				84B2A4641EBCC7D200B6516B /* Models */,
 				84D9BC341EAE521600CCED2D /* AppDelegate.swift */,
 				84D9BC381EAE521600CCED2D /* Main.storyboard */,
-				84D9BC6F1EAE730500CCED2D /* TweetTableViewCell.swift */,
-				84D9BC621EAE526E00CCED2D /* TweetTableViewController.swift */,
+				84B2A4651EBCE08500B6516B /* SmashTagModel.xcdatamodeld */,
 				84D9BC3B1EAE521600CCED2D /* Assets.xcassets */,
 				84D9BC3D1EAE521600CCED2D /* LaunchScreen.storyboard */,
 				84D9BC401EAE521600CCED2D /* Info.plist */,
-				84C63EB01EAFA9BA007A344A /* MentionsTableViewController.swift */,
-				84B2A45A1EB91FC700B6516B /* ImageTableViewCell.swift */,
-				84B2A45E1EB92F5B00B6516B /* SearchHistoryTableViewController.swift */,
-				84B2A4601EB92FA000B6516B /* SearchHistory.swift */,
 			);
 			path = SmashTag;
 			sourceTree = "<group>";
@@ -291,6 +329,8 @@
 			files = (
 				84D9BC631EAE526E00CCED2D /* TweetTableViewController.swift in Sources */,
 				84B2A45F1EB92F5B00B6516B /* SearchHistoryTableViewController.swift in Sources */,
+				84B2A4671EBCE08500B6516B /* SmashTagModel.xcdatamodeld in Sources */,
+				84B2A4841EBCF70400B6516B /* Tweet.swift in Sources */,
 				84D9BC351EAE521600CCED2D /* AppDelegate.swift in Sources */,
 				8462F26C1EB3EFE400EB648F /* ImageViewController.swift in Sources */,
 				84B2A45B1EB91FC700B6516B /* ImageTableViewCell.swift in Sources */,
@@ -562,6 +602,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		84B2A4651EBCE08500B6516B /* SmashTagModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				84B2A4661EBCE08500B6516B /* SmashTagModel.xcdatamodel */,
+			);
+			currentVersion = 84B2A4661EBCE08500B6516B /* SmashTagModel.xcdatamodel */;
+			path = SmashTagModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 84D9BC291EAE521600CCED2D /* Project object */;
 }

@@ -37,7 +37,7 @@ class SearchHistoryTableViewController: UITableViewController {
                 if let cell = sender as? UITableViewCell {
                     if let seguedToMVC = segue.destination as? TweetTableViewController {
                         seguedToMVC.searchTextField.text = cell.textLabel?.text
-                        seguedToMVC.textFieldShouldReturn(seguedToMVC.searchTextField)
+                        _ = seguedToMVC.textFieldShouldReturn(seguedToMVC.searchTextField)
                     }
                 }
             default: break
