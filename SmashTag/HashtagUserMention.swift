@@ -14,7 +14,7 @@ class HashtagUserMention: NSManagedObject {
     
     class func findOrCreateMentions(withMention keyword: String, withSearchWord searchWord: String, in context: NSManagedObjectContext) throws -> HashtagUserMention {
         let request: NSFetchRequest<HashtagUserMention> = HashtagUserMention.fetchRequest()
-        request.predicate = NSPredicate(format: "text = %@", keyword)
+        request.predicate = NSPredicate(format: "text like[c] %@", keyword)
 
         do {
             let matches = try context.fetch(request)
@@ -27,9 +27,6 @@ class HashtagUserMention: NSManagedObject {
         
         let mention = HashtagUserMention(context: context)
         mention.text = keyword
-//        let word = try? SearchWordMention.findOrCreateSearchWordMention(matchingSearchWord: searchWord, matchingMention: keyword, in: context)
-//        mention.addToSearchWords(word!)
-        
         return mention
     }
 }

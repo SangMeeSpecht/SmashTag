@@ -11,9 +11,6 @@ import CoreData
 
 class SearchWordMention: NSManagedObject {
     class func findOrCreateSearchWordMention(matchingSearchWord searchWord: String, matchingMention mentionWord: String, in context: NSManagedObjectContext) throws -> SearchWordMention {
-        print(searchWord)
-        print(mentionWord)
-        print("")
         let mention = try? HashtagUserMention.findOrCreateMentions(withMention: mentionWord, withSearchWord: searchWord, in: context)
         let searchterm = try? SearchWord.findOrCreateSearchWord(matching: searchWord, in: context)
         
@@ -24,8 +21,6 @@ class SearchWordMention: NSManagedObject {
             let matches = try context.fetch(request)
             if matches.count > 0 {
                 matches[0].count += 1
-                print("************")
-                print(matches[0].count)
                 return matches[0]
             }
         } catch {
