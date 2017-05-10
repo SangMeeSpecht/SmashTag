@@ -34,7 +34,7 @@
     
     private var twitterRequest: Twitter.Request? {
         if let query = searchText, !query.isEmpty {
-            return Twitter.Request(search: query + " -filter:retweets", count: 100)
+            return Twitter.Request(search: query + " -filter:retweets", count: 5)
         }
         return nil
     }

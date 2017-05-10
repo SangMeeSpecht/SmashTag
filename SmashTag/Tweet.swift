@@ -13,6 +13,7 @@ import CoreData
 class Tweet: NSManagedObject {
     
     class func findOrCreateTweet(matching tweetInfo: Twitter.Tweet, searchWord: String, in context: NSManagedObjectContext) throws -> Tweet {
+        let word = try? SearchWord.findOrCreateSearchWord(matching: searchWord, in: context)
         
         let request: NSFetchRequest<Tweet> = Tweet.fetchRequest()
         request.predicate = NSPredicate(format: "id = %@", tweetInfo.identifier)
@@ -20,6 +21,12 @@ class Tweet: NSManagedObject {
         do {
             let matches = try context.fetch(request)
             if matches.count > 0 {
+                matches[0].addToSearchWords(word!)
+                
+                for mention in (tweetInfo.hashtags + tweetInfo.userMentions) {
+                        _ = try? SearchWordMention.findOrCreateSearchWordMention(matchingSearchWord: searchWord, matchingMention: mention.keyword, in: context)
+                }
+                
                 return matches[0]
             }
         } catch {
@@ -28,14 +35,14 @@ class Tweet: NSManagedObject {
         
         let tweet = Tweet(context: context)
         tweet.id = tweetInfo.identifier
+        tweet.addToSearchWords(word!)
         
         for mention in (tweetInfo.hashtags + tweetInfo.userMentions) {
             if let mentions = try? HashtagUserMention.findOrCreateMentions(withMention: mention.keyword, withSearchWord: searchWord, in: context) {
                 tweet.addToMentions(mentions)
+                _ = try? SearchWordMention.findOrCreateSearchWordMention(matchingSearchWord: searchWord, matchingMention: mention.keyword, in: context)
             }
         }
-        
-        tweet.searchWord = try? SearchWord.findOrCreateSearchWord(matching: searchWord, in: context)
         
         return tweet
     }

@@ -27,8 +27,8 @@ class HashtagUserMention: NSManagedObject {
         
         let mention = HashtagUserMention(context: context)
         mention.text = keyword
-        let word = try? SearchWord.findOrCreateSearchWord(matching: searchWord, in: context)
-        mention.searchWords = word
+//        let word = try? SearchWordMention.findOrCreateSearchWordMention(matchingSearchWord: searchWord, matchingMention: keyword, in: context)
+//        mention.addToSearchWords(word!)
         
         return mention
     }
