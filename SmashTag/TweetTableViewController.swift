@@ -34,7 +34,7 @@
     
     private var twitterRequest: Twitter.Request? {
         if let query = searchText, !query.isEmpty {
-            return Twitter.Request(search: query + " -filter:retweets", count: 5)
+            return Twitter.Request(search: query + " -filter:retweets", count: 100)
         }
         return nil
     }
@@ -109,7 +109,6 @@
         }
     }
     
-// create/find search word, create/find tweets/mentions
     private func updateDatabase(newTweets: [Twitter.Tweet]) {
         container?.performBackgroundTask { context in
             _ = try? SearchWord.findOrCreateSearchWord(matching: self.searchText!, in: context)
