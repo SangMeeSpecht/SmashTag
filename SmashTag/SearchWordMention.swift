@@ -20,6 +20,7 @@ class SearchWordMention: NSManagedObject {
         do {
             let matches = try context.fetch(request)
             if matches.count > 0 {
+                matches[0].count += 1
                 return matches[0]
             }
         } catch {
