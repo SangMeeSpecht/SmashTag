@@ -8,6 +8,7 @@
  
  import UIKit
  import Twitter
+ import CoreData
  
  class TweetTableViewController: UITableViewController, UITextFieldDelegate {
     var tweets = [Array<Twitter.Tweet>]() {
@@ -16,6 +17,8 @@
         }
     }
     
+    var container: NSPersistentContainer? = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer
+
     var searchText: String? {
         didSet {
             tweets.removeAll()
@@ -98,10 +101,24 @@
                     if request == self?.lastTwitterRequest {
                         if !newTweets.isEmpty {
                             self?.tweets.insert(newTweets, at: 0)
+                            self?.updateDatabase(newTweets: newTweets)
                         }
                     }
                 }
             }
+        }
+    }
+    
+// create/find search word, create/find tweets/mentions
+    private func updateDatabase(newTweets: [Twitter.Tweet]) {
+        container?.performBackgroundTask { context in
+            _ = try? SearchWord.findOrCreateSearchWord(matching: self.searchText!, in: context)
+            
+            for twitterInfo in newTweets {
+                _ = try? Tweet.findOrCreateTweet(matching: twitterInfo, searchWord: self.searchText!, in: context)
+            }
+            
+            try? context.save()
         }
     }
     

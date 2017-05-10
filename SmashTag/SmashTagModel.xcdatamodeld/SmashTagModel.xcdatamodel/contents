@@ -1,29 +1,24 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="12141" systemVersion="16A323" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
-    <entity name="Hashtag" representedClassName=".Hashtag" syncable="YES">
-        <attribute name="hashtag_name" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="tweet" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Tweet" inverseName="hashtags" inverseEntity="Tweet" syncable="YES"/>
-    </entity>
-    <entity name="SearchWord" representedClassName=".SearchWord" syncable="YES">
-        <attribute name="id" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="word" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="tweets" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Tweet" inverseName="search_word" inverseEntity="Tweet" syncable="YES"/>
-    </entity>
-    <entity name="Tweet" representedClassName=".Tweet" syncable="YES">
-        <attribute name="id" optional="YES" attributeType="String" syncable="YES"/>
+    <entity name="HashtagUserMention" representedClassName=".HashtagUserMention" syncable="YES" codeGenerationType="category">
+        <attribute name="count" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="text" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="hashtags" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Hashtag" inverseName="tweet" inverseEntity="Hashtag" syncable="YES"/>
-        <relationship name="search_word" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="SearchWord" inverseName="tweets" inverseEntity="SearchWord" syncable="YES"/>
-        <relationship name="users" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="User" inverseName="tweet" inverseEntity="User" syncable="YES"/>
+        <relationship name="searchWords" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="SearchWord" inverseName="mentions" inverseEntity="SearchWord" syncable="YES"/>
+        <relationship name="tweet" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Tweet" inverseName="mentions" inverseEntity="Tweet" syncable="YES"/>
     </entity>
-    <entity name="User" representedClassName=".User" syncable="YES">
-        <attribute name="user_name" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="tweet" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Tweet" inverseName="users" inverseEntity="Tweet" syncable="YES"/>
+    <entity name="SearchWord" representedClassName=".SearchWord" syncable="YES" codeGenerationType="category">
+        <attribute name="word" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="mentions" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="HashtagUserMention" inverseName="searchWords" inverseEntity="HashtagUserMention" syncable="YES"/>
+        <relationship name="tweets" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Tweet" inverseName="searchWord" inverseEntity="Tweet" syncable="YES"/>
+    </entity>
+    <entity name="Tweet" representedClassName=".Tweet" syncable="YES" codeGenerationType="category">
+        <attribute name="id" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="mentions" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="HashtagUserMention" inverseName="tweet" inverseEntity="HashtagUserMention" syncable="YES"/>
+        <relationship name="searchWord" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="SearchWord" inverseName="tweets" inverseEntity="SearchWord" syncable="YES"/>
     </entity>
     <elements>
-        <element name="SearchWord" positionX="-612" positionY="-156" width="128" height="88"/>
-        <element name="Tweet" positionX="-407" positionY="-144" width="128" height="118"/>
-        <element name="Hashtag" positionX="-234" positionY="-216" width="128" height="73"/>
-        <element name="User" positionX="-225" positionY="-69" width="128" height="73"/>
+        <element name="SearchWord" positionX="-693" positionY="-228" width="128" height="88"/>
+        <element name="Tweet" positionX="-362" positionY="-243" width="128" height="88"/>
+        <element name="HashtagUserMention" positionX="-540" positionY="-333" width="128" height="103"/>
     </elements>
 </model>

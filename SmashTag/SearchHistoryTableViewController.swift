@@ -40,6 +40,13 @@ class SearchHistoryTableViewController: UITableViewController {
                         _ = seguedToMVC.textFieldShouldReturn(seguedToMVC.searchTextField)
                     }
                 }
+            case Storyboard.PopularMentions:
+                if let cell = sender as? UITableViewCell {
+                    if let seguedToMVC = segue.destination as? PopularMentionsTableViewController {
+                        //seguedToMVC.searchTextField.text = cell.textLabel?.text
+                        //_ = seguedToMVC.textFieldShouldReturn(seguedToMVC.searchTextField)
+                    }
+                }
             default: break
             }
         }
@@ -47,6 +54,7 @@ class SearchHistoryTableViewController: UITableViewController {
     
     private struct Storyboard {
         static let SearchCell = "Search Word"
+        static let PopularMentions = "Popular Mentions"
     }
 }
 

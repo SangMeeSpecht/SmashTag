@@ -130,7 +130,7 @@
                                 <rect key="frame" x="0.0" y="72" width="375" height="154"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="auo-Fv-CvT" id="Z0n-Vo-bq6">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="154"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="153.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="GxS-Hi-kcs">
@@ -195,7 +195,6 @@
         <!--Tab Bar Controller-->
         <scene sceneID="XPg-iN-K7j">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="m9e-Vg-m6R" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tabBarController id="Oc6-iu-3BW" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" id="7cm-22-uKS">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
@@ -207,8 +206,9 @@
                         <segue destination="S3I-rQ-68D" kind="relationship" relationship="viewControllers" id="oyE-EB-iow"/>
                     </connections>
                 </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="m9e-Vg-m6R" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1239" y="45"/>
+            <point key="canvasLocation" x="-1074" y="46"/>
         </scene>
         <!--History-->
         <scene sceneID="7bN-Lg-Y6E">
@@ -228,7 +228,7 @@
                                 </tableViewCellContentView>
                                 <connections>
                                     <segue destination="epT-RU-bab" kind="show" identifier="Search Word" id="MBz-wg-axn"/>
-                                    <segue destination="xJe-Ux-OB4" kind="show" trigger="accessoryAction" id="B8u-3H-9qG"/>
+                                    <segue destination="xJe-Ux-OB4" kind="show" identifier="Popular Mentions" trigger="accessoryAction" id="B8u-3H-9qG"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -243,16 +243,16 @@
             </objects>
             <point key="canvasLocation" x="465" y="-677"/>
         </scene>
-        <!--Table View Controller-->
+        <!--Popular Mentions Table View Controller-->
         <scene sceneID="f3b-qa-ecb">
             <objects>
-                <tableViewController id="xJe-Ux-OB4" sceneMemberID="viewController">
+                <tableViewController id="xJe-Ux-OB4" customClass="PopularMentionsTableViewController" customModule="SmashTag" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="2yc-Qq-Hrh">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" textLabel="6zW-ie-02A" detailTextLabel="xDK-d5-Q7r" style="IBUITableViewCellStyleValue1" id="aCz-cd-TLL">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Pop Mention" textLabel="6zW-ie-02A" detailTextLabel="xDK-d5-Q7r" style="IBUITableViewCellStyleValue1" id="aCz-cd-TLL">
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="aCz-cd-TLL" id="FMx-wn-PXC">
