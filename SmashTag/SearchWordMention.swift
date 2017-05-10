@@ -20,7 +20,6 @@ class SearchWordMention: NSManagedObject {
         do {
             let matches = try context.fetch(request)
             if matches.count > 0 {
-                matches[0].count += 1
                 return matches[0]
             }
         } catch {
@@ -33,5 +32,22 @@ class SearchWordMention: NSManagedObject {
         searchWordMention.searchWord = searchterm
         
         return searchWordMention
+    }
+    
+    class func searchWordDoesNotExist(matching word: String, in context: NSManagedObjectContext) throws -> Bool {
+        let searchWord = try? SearchWord.findOrCreateSearchWord(matching: word, in: context)
+        let request: NSFetchRequest<SearchWordMention> = SearchWordMention.fetchRequest()
+        request.predicate = NSPredicate(format: "searchWord = %@", searchWord!)
+        
+        do {
+            let matches = try context.fetch(request)
+            if matches.count > 0 {
+                return false
+            }
+        } catch {
+            throw error
+        }
+        
+        return true
     }
 }

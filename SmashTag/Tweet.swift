@@ -24,7 +24,9 @@ class Tweet: NSManagedObject {
                 matches[0].addToSearchWords(word!)
                 
                 for mention in (tweetInfo.hashtags + tweetInfo.userMentions) {
+                    if try! SearchWordMention.searchWordDoesNotExist(matching: searchWord, in: context) {
                         _ = try? SearchWordMention.findOrCreateSearchWordMention(matchingSearchWord: searchWord, matchingMention: mention.keyword, in: context)
+                    }
                 }
                 
                 return matches[0]

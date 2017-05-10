@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class PopularMentionsTableViewController: UITableViewController {
+class PopularMentionsTableViewController: FetchedResultsTableViewController {
     var searchWord: String? { didSet { updateUI() } }
     var container: NSPersistentContainer? = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer { didSet { updateUI() } }
     var fetchedResultsController: NSFetchedResultsController<HashtagUserMention>?
@@ -17,7 +17,8 @@ class PopularMentionsTableViewController: UITableViewController {
     private func updateUI() {
         if let context = container?.viewContext, searchWord != nil {
             let request = NSFetchRequest<HashtagUserMention>(entityName: "HashtagUserMention")
-            request.predicate = NSPredicate(format: "searchWord = %@", searchWord!)
+            request.predicate = NSPredicate(format: "searchWords.word like[c]  %@", searchWord!)
+            request.sortDescriptors = [NSSortDescriptor(key: "text", ascending: true)]
             
             fetchedResultsController = NSFetchedResultsController<HashtagUserMention>(fetchRequest: request, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil
             )
@@ -26,30 +27,19 @@ class PopularMentionsTableViewController: UITableViewController {
         }
     }
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
 
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
-    }
-
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return 0
-    }
-
-    /*
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-
-        // Configure the cell...
+        print("***")
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Pop Mention", for: indexPath)
+        print("***")
+        if let mention = fetchedResultsController?.object(at: indexPath) as? HashtagUserMention {
+            print(mention.text)
+            cell.textLabel?.text = mention.text
+        }
 
         return cell
     }
-    */
+ 
 
     /*
     // Override to support conditional editing of the table view.

@@ -43,8 +43,7 @@ class SearchHistoryTableViewController: UITableViewController {
             case Storyboard.PopularMentions:
                 if let cell = sender as? UITableViewCell {
                     if let seguedToMVC = segue.destination as? PopularMentionsTableViewController {
-                        //seguedToMVC.searchTextField.text = cell.textLabel?.text
-                        //_ = seguedToMVC.textFieldShouldReturn(seguedToMVC.searchTextField)
+                        seguedToMVC.searchWord = cell.textLabel?.text
                     }
                 }
             default: break
