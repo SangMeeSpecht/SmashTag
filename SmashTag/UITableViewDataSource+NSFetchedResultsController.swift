@@ -22,7 +22,7 @@ extension PopularMentionsTableViewController
         if let sections = fetchedResultsController?.sections, sections.count > 0 {
             return sections[section].numberOfObjects
         } else {
-            return 1
+            return 0
         }
     }
     

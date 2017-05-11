@@ -33,7 +33,7 @@ class PopularMentionsTableViewController: FetchedResultsTableViewController {
         
         if let mention = fetchedResultsController?.object(at: indexPath) {
             cell.textLabel?.text = mention.mention?.text
-            cell.detailTextLabel?.text = String(mention.count)
+            cell.detailTextLabel?.text = "\(String(mention.count)) mentions"
         }
 
         return cell
