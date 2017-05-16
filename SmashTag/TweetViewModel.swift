@@ -16,7 +16,7 @@ class TweetViewModel {
     var tweets = [Array<Twitter.Tweet>]() {
         didSet {
             DispatchQueue.main.async{
-                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "reloadTable"), object: nil)
+                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "reloadTableData"), object: nil)
             }
         }
     }
@@ -27,8 +27,6 @@ class TweetViewModel {
             searchForTweets()
         }
     }
-    
-    init() {}
     
     private var twitterRequest: Twitter.Request? {
         if let query = searchText, !query.isEmpty {
@@ -73,7 +71,7 @@ class TweetViewModel {
         }
     }
     
-    func removeAllTweets() {
+    private func removeAllTweets() {
         tweets.removeAll()
     }
     

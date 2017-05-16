@@ -7,25 +7,23 @@
  //
  
  import UIKit
- import Twitter
- import CoreData
  
  class TweetTableViewController: UITableViewController, UITextFieldDelegate {
-    var viewModel = TweetViewModel()
+    var tweetViewModel = TweetViewModel()
+    private var history = SearchHistory()
+    private var searchHistoryViewModel: SearchHistoryViewModel?
 
     var searchText: String? {
         didSet {
-            viewModel.searchText = searchText!
+            tweetViewModel.searchText = searchText!
             title = searchText
-            history.addSearchWord(toHistory: searchText!)
+            searchHistoryViewModel?.addSearchWord(toHistory: searchText!)
         }
     }
     
     func reloadTableView() {
         tableView.reloadData()
     }
-    
-    private var history = SearchHistory()
     
     @IBOutlet weak var searchTextField: UITextField! {
         didSet {
@@ -47,7 +45,7 @@
                 if let cell = sender as? TweetTableViewCell {
                     let indexPath = tableView.indexPath(for: cell)
                     if let seguedToMVC = segue.destination as? MentionsTableViewController {
-                        seguedToMVC.tweet = viewModel.getTweet(at: indexPath!)
+                        seguedToMVC.tweet = tweetViewModel.getTweet(at: indexPath!)
                     }
                 }
             default: break
@@ -58,24 +56,24 @@
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        NotificationCenter.default.addObserver(self, selector: #selector(reloadTableView), name: NSNotification.Name(rawValue: "reloadTable"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(reloadTableView), name: NSNotification.Name(rawValue: "reloadTableData"), object: nil)
+        searchHistoryViewModel = SearchHistoryViewModel(history: history)
         
-        tableView.estimatedRowHeight = tableView.rowHeight
-        tableView.rowHeight = UITableViewAutomaticDimension
+        formatCellDimensions()
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return viewModel.tweetCount()
+        return tweetViewModel.tweetCount()
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel.tweetsCount(in: section)
+        return tweetViewModel.tweetsCount(in: section)
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: Storyboard.TweetCellIdentifier, for: indexPath)
         
-        let tweet = viewModel.getTweet(at: indexPath)
+        let tweet = tweetViewModel.getTweet(at: indexPath)
         if let tweetCell = cell as? TweetTableViewCell {
             tweetCell.tweet = tweet
         }
@@ -86,6 +84,11 @@
     private struct Storyboard {
         static let TweetCellIdentifier = "Tweet"
         static let SegueIdentifier = "Show Mentions"
+    }
+    
+    private func formatCellDimensions() {
+        tableView.estimatedRowHeight = tableView.rowHeight
+        tableView.rowHeight = UITableViewAutomaticDimension
     }
  }
  
