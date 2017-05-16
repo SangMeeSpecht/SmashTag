@@ -8,25 +8,24 @@
 
 import UIKit
 
-private var history = SearchHistory()
-
 class SearchHistoryTableViewController: UITableViewController {
-    var searchHistory = [String]()
+    private var history = SearchHistory()
+    var searchHistoryViewModel: SearchHistoryViewModel?
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        searchHistory = history.getSearchHistory()
+        searchHistoryViewModel = SearchHistoryViewModel(history: history)
         tableView.reloadData()
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return searchHistory.count
+        return searchHistoryViewModel?.historyCount() ?? 1
     }
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: Storyboard.SearchCell, for: indexPath)
-        cell.textLabel?.text = searchHistory[indexPath.row]
+        cell.textLabel?.text = searchHistoryViewModel?.getSearchWord(at: indexPath.row)
         return cell
     }
     

@@ -12,8 +12,9 @@ import UIKit
 import CoreData
 
 class SearchHistoryViewModel {
-    var historyModel: SearchHistory
+    var historyModel: SearchHistory?
     let defaults = UserDefaults.standard
+    var searchHistory = [String]()
     
     init(history: SearchHistory) {
         self.historyModel = history
@@ -32,6 +33,14 @@ class SearchHistoryViewModel {
         }
         
         defaults.setValue(history, forKey: "history")
+    }
+    
+    func historyCount() -> Int? {
+        return historyModel?.getSearchHistory().count
+    }
+    
+    func getSearchWord(at index: Int) -> String? {
+        return historyModel?.getSearchHistory()[index]
     }
     
     private func wordIsUnique(inHistory history: [String], word: String) -> Bool {
