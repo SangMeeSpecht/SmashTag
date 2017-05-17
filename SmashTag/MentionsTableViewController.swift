@@ -10,29 +10,26 @@ import UIKit
 import Twitter
 
 class MentionsTableViewController: UITableViewController {
-    var mentionsViewModel = MentionsViewModel()
-    
-    var tweet: Twitter.Tweet? {
-        didSet {
-            mentionsViewModel.organizeMentions(for: tweet!)
-        }
-    }
+    var mentionsViewModel: MentionsViewModel!
+    var tweet: Twitter.Tweet?
 
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.title = Storyboard.Mention
+        mentionsViewModel = MentionsViewModel()
+        mentionsViewModel?.organizeMentions(for: tweet!)
     }
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return mentionsViewModel.mentionCategoryCount()
+        return mentionsViewModel!.mentionCategoryCount()
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return mentionsViewModel.mentionCount(in: section)
+        return mentionsViewModel!.mentionCount(in: section)
     }
 
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return mentionsViewModel.mentionCategoryTitle(in: section)
+        return mentionsViewModel?.mentionCategoryTitle(in: section)
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

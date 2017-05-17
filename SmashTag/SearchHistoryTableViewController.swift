@@ -9,12 +9,12 @@
 import UIKit
 
 class SearchHistoryTableViewController: UITableViewController {
-    private var history = SearchHistory()
+    private var history: SearchHistory?
     var searchHistoryViewModel: SearchHistoryViewModel?
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        searchHistoryViewModel = SearchHistoryViewModel(history: history)
+        setupViewModel()
         tableView.reloadData()
     }
 
@@ -53,6 +53,11 @@ class SearchHistoryTableViewController: UITableViewController {
     private struct Storyboard {
         static let SearchCell = "Search Word"
         static let PopularMentions = "Popular Mentions"
+    }
+    
+    private func setupViewModel() {
+        history = SearchHistory()
+        searchHistoryViewModel = SearchHistoryViewModel(history: history!)
     }
 }
 

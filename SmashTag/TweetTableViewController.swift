@@ -9,20 +9,18 @@
  import UIKit
  
  class TweetTableViewController: UITableViewController, UITextFieldDelegate {
-    var tweetViewModel = TweetViewModel()
-    private var history = SearchHistory()
+    var tweetViewModel: TweetViewModel?
+    private var history: SearchHistory?
     private var searchHistoryViewModel: SearchHistoryViewModel?
 
     var searchText: String? {
         didSet {
-            tweetViewModel.searchText = searchText!
             title = searchText
-            searchHistoryViewModel?.addSearchWord(toHistory: searchText!)
+            if let viewModel = tweetViewModel {
+                viewModel.searchText = searchText!
+                searchHistoryViewModel?.addSearchWord(toHistory: searchText!)
+            }
         }
-    }
-    
-    func reloadTableView() {
-        tableView.reloadData()
     }
     
     @IBOutlet weak var searchTextField: UITextField! {
@@ -30,6 +28,10 @@
             searchTextField.delegate = self
             searchTextField.text = searchText
         }
+    }
+    
+    func reloadTableView() {
+        tableView.reloadData()
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -45,7 +47,7 @@
                 if let cell = sender as? TweetTableViewCell {
                     let indexPath = tableView.indexPath(for: cell)
                     if let seguedToMVC = segue.destination as? MentionsTableViewController {
-                        seguedToMVC.tweet = tweetViewModel.getTweet(at: indexPath!)
+                        seguedToMVC.tweet = tweetViewModel?.getTweet(at: indexPath!)
                     }
                 }
             default: break
@@ -55,25 +57,23 @@
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         NotificationCenter.default.addObserver(self, selector: #selector(reloadTableView), name: NSNotification.Name(rawValue: "reloadTableData"), object: nil)
-        searchHistoryViewModel = SearchHistoryViewModel(history: history)
-        
+        setupViewModels()
         formatCellDimensions()
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return tweetViewModel.tweetCount()
+        return tweetViewModel!.tweetCount()
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return tweetViewModel.tweetsCount(in: section)
+        return tweetViewModel!.tweetsCount(in: section)
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: Storyboard.TweetCellIdentifier, for: indexPath)
         
-        let tweet = tweetViewModel.getTweet(at: indexPath)
+        let tweet = tweetViewModel?.getTweet(at: indexPath)
         if let tweetCell = cell as? TweetTableViewCell {
             tweetCell.tweet = tweet
         }
@@ -89,6 +89,16 @@
     private func formatCellDimensions() {
         tableView.estimatedRowHeight = tableView.rowHeight
         tableView.rowHeight = UITableViewAutomaticDimension
+    }
+    
+    private func setupViewModels() {
+        tweetViewModel = TweetViewModel()
+        history = SearchHistory()
+        searchHistoryViewModel = SearchHistoryViewModel(history: history!)
+        if let word = searchText {
+            tweetViewModel?.searchText = word
+            searchHistoryViewModel?.addSearchWord(toHistory: word)
+        }
     }
  }
  
