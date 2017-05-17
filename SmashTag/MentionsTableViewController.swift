@@ -10,43 +10,11 @@ import UIKit
 import Twitter
 
 class MentionsTableViewController: UITableViewController {
-    private var mentions: [Mentions] = []
-    
-    private struct Mentions {
-        var category: String
-        var data: [IndividualMentions]
-    }
-    
-    private enum IndividualMentions {
-        case Keyword(String)
-        case Image(URL, Double)
-    }
+    var mentionsViewModel = MentionsViewModel()
     
     var tweet: Twitter.Tweet? {
         didSet {
-            if let images = tweet?.media {
-                if images.count > 0 {
-                    mentions.append(Mentions(category: "Images", data: images.map { IndividualMentions.Image($0.url, $0.aspectRatio) } ))
-                }
-            }
-              
-            if let hashtags = tweet?.hashtags {
-                if hashtags.count > 0 {
-                    mentions.append(Mentions(category: "Hashtags", data: hashtags.map { IndividualMentions.Keyword($0.keyword) } ))
-                }
-            }
-            
-            if let users = tweet?.userMentions {
-                if users.count > 0 {
-                    mentions.append(Mentions(category: "Users", data: users.map { IndividualMentions.Keyword($0.keyword) } ))
-                }
-            }
-            
-            if let urls = tweet?.urls {
-                if urls.count > 0 {
-                    mentions.append(Mentions(category: "URLs", data: urls.map { IndividualMentions.Keyword($0.keyword) } ))
-                }
-            }
+            mentionsViewModel.organizeMentions(for: tweet!)
         }
     }
 
@@ -56,19 +24,19 @@ class MentionsTableViewController: UITableViewController {
     }
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return mentions.count
+        return mentionsViewModel.mentionCategoryCount()
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return mentions[section].data.count
+        return mentionsViewModel.mentionCount(in: section)
     }
 
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return mentions[section].category
+        return mentionsViewModel.mentionCategoryTitle(in: section)
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let currentMention = mentions[indexPath.section].data[indexPath.row]
+        let currentMention = mentionsViewModel.getMention(in: indexPath)
         
         switch currentMention {
         case .Keyword(let keyword):
@@ -116,7 +84,7 @@ class MentionsTableViewController: UITableViewController {
     
 
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        let mention = mentions[indexPath.section].data[indexPath.row]
+        let mention = mentionsViewModel.getMention(in: indexPath)
         
         switch mention {
         case .Image(_, let ratio):

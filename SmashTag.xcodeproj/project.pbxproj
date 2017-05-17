@@ -14,6 +14,7 @@
 		8415B20A1ECA36200006647B /* TweetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8415B2091ECA36200006647B /* TweetViewModel.swift */; };
 		8462F26C1EB3EFE400EB648F /* ImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8462F26B1EB3EFE400EB648F /* ImageViewController.swift */; };
 		84A64FF11ECB87610053E465 /* SearchHistoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A64FF01ECB87610053E465 /* SearchHistoryViewModel.swift */; };
+		84A64FF51ECC9E800053E465 /* MentionsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A64FF41ECC9E800053E465 /* MentionsViewModel.swift */; };
 		84B2A45B1EB91FC700B6516B /* ImageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B2A45A1EB91FC700B6516B /* ImageTableViewCell.swift */; };
 		84B2A45F1EB92F5B00B6516B /* SearchHistoryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B2A45E1EB92F5B00B6516B /* SearchHistoryTableViewController.swift */; };
 		84B2A4611EB92FA000B6516B /* SearchHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B2A4601EB92FA000B6516B /* SearchHistory.swift */; };
@@ -58,6 +59,7 @@
 		8415B2091ECA36200006647B /* TweetViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TweetViewModel.swift; sourceTree = "<group>"; };
 		8462F26B1EB3EFE400EB648F /* ImageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageViewController.swift; sourceTree = "<group>"; };
 		84A64FF01ECB87610053E465 /* SearchHistoryViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchHistoryViewModel.swift; sourceTree = "<group>"; };
+		84A64FF41ECC9E800053E465 /* MentionsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MentionsViewModel.swift; sourceTree = "<group>"; };
 		84B2A45A1EB91FC700B6516B /* ImageTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageTableViewCell.swift; sourceTree = "<group>"; };
 		84B2A45E1EB92F5B00B6516B /* SearchHistoryTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchHistoryTableViewController.swift; sourceTree = "<group>"; };
 		84B2A4601EB92FA000B6516B /* SearchHistory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchHistory.swift; sourceTree = "<group>"; };
@@ -114,6 +116,7 @@
 			children = (
 				8415B2091ECA36200006647B /* TweetViewModel.swift */,
 				84A64FF01ECB87610053E465 /* SearchHistoryViewModel.swift */,
+				84A64FF41ECC9E800053E465 /* MentionsViewModel.swift */,
 			);
 			name = ViewModel;
 			sourceTree = "<group>";
@@ -384,6 +387,7 @@
 				8415B2051EC3A1540006647B /* UITableViewDataSource+NSFetchedResultsController.swift in Sources */,
 				8415B2001EC36DCD0006647B /* SearchWordMention.swift in Sources */,
 				8415B2061EC3A1540006647B /* FetchedResultsTableViewController.swift in Sources */,
+				84A64FF51ECC9E800053E465 /* MentionsViewModel.swift in Sources */,
 				84C63EB11EAFA9BA007A344A /* MentionsTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
