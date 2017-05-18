@@ -45,7 +45,11 @@ class SearchHistoryViewModel {
     
     private func wordIsUnique(inHistory history: [String], word: String) -> Bool {
         let lowerCaseWord = word.lowercased()
-        return !history.contains(lowerCaseWord)
+        
+        if history.contains(word) || history.contains(lowerCaseWord) {
+            return false
+        }
+        return true
     }
     
     private func historyIsFull(inHistory history: [String]) -> Bool {
