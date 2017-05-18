@@ -47,7 +47,7 @@
                 if let cell = sender as? TweetTableViewCell {
                     let indexPath = tableView.indexPath(for: cell)
                     if let seguedToMVC = segue.destination as? MentionsTableViewController {
-                        seguedToMVC.tweet = tweetViewModel?.getTweet(at: indexPath!)
+                        seguedToMVC.mentionsViewModel = MentionsViewModel(with: (tweetViewModel?.getTweet(at: indexPath!))!)
                     }
                 }
             default: break

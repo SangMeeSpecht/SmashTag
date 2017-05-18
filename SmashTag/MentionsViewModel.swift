@@ -10,6 +10,11 @@ import Foundation
 import Twitter
 
 class MentionsViewModel {
+    private var tweet: Twitter.Tweet? {
+        didSet {
+            organizeMentions(for: tweet!)
+        }
+    }
     private var mentions: [Mentions] = []
     
     private struct Mentions {
@@ -20,6 +25,10 @@ class MentionsViewModel {
     enum IndividualMentions {
         case Keyword(String)
         case Image(URL, Double)
+    }
+    
+    init(with tweet: Twitter.Tweet) {
+        ({self.tweet = tweet})()
     }
     
     func organizeMentions(for tweet: Twitter.Tweet) {

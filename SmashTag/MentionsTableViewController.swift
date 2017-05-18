@@ -7,17 +7,13 @@
 //
 
 import UIKit
-import Twitter
 
 class MentionsTableViewController: UITableViewController {
     var mentionsViewModel: MentionsViewModel!
-    var tweet: Twitter.Tweet?
 
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.title = Storyboard.Mention
-        mentionsViewModel = MentionsViewModel()
-        mentionsViewModel?.organizeMentions(for: tweet!)
     }
 
     override func numberOfSections(in tableView: UITableView) -> Int {
