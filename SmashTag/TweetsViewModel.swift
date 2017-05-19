@@ -12,16 +12,13 @@ import UIKit
 import CoreData
 
 class TweetsViewModel {
-    private var lastTwitterRequest: Twitter.Request?
+    var tweetsSet: ((TweetsViewModel) -> ())?
     var tweets = [Array<Twitter.Tweet>]() {
         didSet {
-            DispatchQueue.main.async{
-                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "reloadTableData"), object: nil)
-            }
+            self.tweetsSet?(self)
         }
     }
     
-    var container: NSPersistentContainer? = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer
     var searchText: String? {
         didSet {
             removeAllTweets()
@@ -29,6 +26,8 @@ class TweetsViewModel {
         }
     }
     
+    private var lastTwitterRequest: Twitter.Request?
+    private var container: NSPersistentContainer? = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer
     private var twitterRequest: Twitter.Request? {
         if let query = searchText, !query.isEmpty {
             return Twitter.Request(search: query + " -filter:retweets", count: 100)
@@ -60,6 +59,10 @@ class TweetsViewModel {
         }
     }
     
+    func getTweet(at index: IndexPath) -> Twitter.Tweet {
+        return tweets[index.section][index.row]
+    }
+    
     private func updateDatabase(newTweets: [Twitter.Tweet]) {
         container?.performBackgroundTask { context in
             _ = try? SearchWord.findOrCreateSearchWord(matching: self.searchText!, in: context)
@@ -76,8 +79,5 @@ class TweetsViewModel {
         tweets.removeAll()
     }
     
-    func getTweet(at index: IndexPath) -> Twitter.Tweet {
-        return tweets[index.section][index.row]
-    }
 }
 

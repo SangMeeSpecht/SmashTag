@@ -9,10 +9,14 @@
  import UIKit
  
  class TweetTableViewController: UITableViewController, UITextFieldDelegate {
-    var tweetsViewModel: TweetsViewModel?
-    private var history: SearchHistory?
-    private var searchHistoryViewModel: SearchHistoryViewModel?
-
+    var tweetsViewModel: TweetsViewModel? {
+        didSet {
+            self.tweetsViewModel?.tweetsSet = { [unowned self] viewModel in
+                self.tableView.reloadData()
+            }
+        }
+    }
+    
     var searchText: String? {
         didSet {
             title = searchText
@@ -23,15 +27,15 @@
         }
     }
     
+    private var history: SearchHistory?
+    private var searchHistoryViewModel: SearchHistoryViewModel?
+
+    
     @IBOutlet weak var searchTextField: UITextField! {
         didSet {
             searchTextField.delegate = self
             searchTextField.text = searchText
         }
-    }
-    
-    func reloadTableView() {
-        tableView.reloadData()
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -57,7 +61,6 @@
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        NotificationCenter.default.addObserver(self, selector: #selector(reloadTableView), name: NSNotification.Name(rawValue: "reloadTableData"), object: nil)
         setupViewModels()
         formatCellDimensions()
     }
