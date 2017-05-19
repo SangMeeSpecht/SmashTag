@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import Twitter
 
 class TweetTableViewCell: UITableViewCell {
     @IBOutlet weak var tweetScreenNameLabel: UILabel!
@@ -15,19 +14,11 @@ class TweetTableViewCell: UITableViewCell {
     @IBOutlet weak var tweetProfileImageView: UIImageView!
     @IBOutlet weak var tweetCreatedLabel: UILabel!
     
-    var tweet: Twitter.Tweet? {
+    var tweetViewModel: TweetViewModel? {
         didSet {
             updateUI()
         }
     }
-    
-    private let oneDayOld: Double = 24 * 60 * 60
-    
-    private let mentionColors = [
-        "hashtags": UIColor.magenta,
-        "urls": UIColor.purple,
-        "userMentions": UIColor.green
-    ]
     
     private func updateUI() {
         removeExistingTweetInfo()
@@ -42,65 +33,31 @@ class TweetTableViewCell: UITableViewCell {
     }
     
     private func populateWithNewTweetInfo() {
-        if let tweet = self.tweet {
-            setTextLabel(forTweet: tweet)
-            setScreenNameLabel(forTweet: tweet)
-            setProfileImage(forTweet: tweet)
-            tweetCreatedLabel?.text = timeCreated(forTweet: tweet)
-        }
+        setTextLabel()
+        setScreenNameLabel()
+        setProfileImage()
+        tweetCreatedLabel?.text = timeCreated()
     }
     
-    private func setTextLabel(forTweet tweet: Twitter.Tweet) {
-        tweetTextLabel?.attributedText = coloredMentions(inTweet: tweet)
-        addCameraIconForImages(inTweet: tweet)
+    private func setTextLabel() {
+        tweetTextLabel?.attributedText = tweetViewModel?.getColoredMentions()
+        addCameraIconForImages()
     }
     
-    private func setScreenNameLabel(forTweet tweet: Twitter.Tweet) {
-        tweetScreenNameLabel?.text = "\(tweet.user)"
+    private func setScreenNameLabel() {
+        tweetScreenNameLabel?.text = tweetViewModel?.getScreenName()
     }
     
-    private func setProfileImage(forTweet tweet: Twitter.Tweet) {
-        if let profileImageURL = tweet.user.profileImageURL {
-            if let imageData = try? Data(contentsOf: profileImageURL) {
-                tweetProfileImageView?.image = UIImage(data: imageData)
-            }
-        }
+    private func setProfileImage() {
+        tweetProfileImageView?.image = tweetViewModel?.getProfileImage()
     }
     
-    private func timeCreated(forTweet tweet: Twitter.Tweet) -> String {
-        let formatter = DateFormatter()
-        
-        if NSDate().timeIntervalSince(tweet.created) > oneDayOld {
-            formatter.dateStyle = .short
-        } else {
-            formatter.timeStyle = .short
-        }
-        
-        return formatter.string(from: tweet.created)
+    private func timeCreated() -> String {
+        return (tweetViewModel?.getTimeCreated())!
     }
     
-    private func coloredMentions(inTweet tweet: Twitter.Tweet) -> NSMutableAttributedString {
-        let attributedString = NSMutableAttributedString(string: tweet.text)
-        
-        attributedString.setMentionsColor(mentions: tweet.hashtags, color: mentionColors["hashtags"]!)
-        attributedString.setMentionsColor(mentions: tweet.urls, color: mentionColors["urls"]!)
-        attributedString.setMentionsColor(mentions: tweet.userMentions, color: mentionColors["userMentions"]!)
-        
-        return attributedString
-    }
-    
-    private func addCameraIconForImages(inTweet tweet: Twitter.Tweet) {
-        for _ in tweet.media {
-            tweetTextLabel.text! += "  📷"
-        }
+    private func addCameraIconForImages() {
+        tweetTextLabel.text! += (tweetViewModel?.addCameraIcon())!
     }
 }
 
-
-private extension NSMutableAttributedString {
-    func setMentionsColor(mentions: [Mention], color: UIColor) {
-        for mention in mentions {
-            addAttribute(NSForegroundColorAttributeName, value: color, range: mention.nsrange)
-        }
-    }
-}

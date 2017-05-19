@@ -9,14 +9,14 @@
  import UIKit
  
  class TweetTableViewController: UITableViewController, UITextFieldDelegate {
-    var tweetViewModel: TweetViewModel?
+    var tweetsViewModel: TweetsViewModel?
     private var history: SearchHistory?
     private var searchHistoryViewModel: SearchHistoryViewModel?
 
     var searchText: String? {
         didSet {
             title = searchText
-            if let viewModel = tweetViewModel {
+            if let viewModel = tweetsViewModel {
                 viewModel.searchText = searchText!
                 searchHistoryViewModel?.addSearchWord(toHistory: searchText!)
             }
@@ -47,7 +47,7 @@
                 if let cell = sender as? TweetTableViewCell {
                     let indexPath = tableView.indexPath(for: cell)
                     if let seguedToMVC = segue.destination as? MentionsTableViewController {
-                        seguedToMVC.mentionsViewModel = MentionsViewModel(with: (tweetViewModel?.getTweet(at: indexPath!))!)
+                        seguedToMVC.mentionsViewModel = MentionsViewModel(with: (tweetsViewModel?.getTweet(at: indexPath!))!)
                     }
                 }
             default: break
@@ -63,19 +63,19 @@
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return tweetViewModel!.tweetCount()
+        return tweetsViewModel!.tweetCount()
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return tweetViewModel!.tweetsCount(in: section)
+        return tweetsViewModel!.tweetsCount(in: section)
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: Storyboard.TweetCellIdentifier, for: indexPath)
         
-        let tweet = tweetViewModel?.getTweet(at: indexPath)
         if let tweetCell = cell as? TweetTableViewCell {
-            tweetCell.tweet = tweet
+            let tweet = tweetsViewModel?.getTweet(at: indexPath)
+            tweetCell.tweetViewModel = TweetViewModel(tweet: tweet!)
         }
         
         return cell
@@ -92,11 +92,11 @@
     }
     
     private func setupViewModels() {
-        tweetViewModel = TweetViewModel()
+        tweetsViewModel = TweetsViewModel()
         history = SearchHistory()
         searchHistoryViewModel = SearchHistoryViewModel(history: history!)
         if let word = searchText {
-            tweetViewModel?.searchText = word
+            tweetsViewModel?.searchText = word
             searchHistoryViewModel?.addSearchWord(toHistory: word)
         }
     }

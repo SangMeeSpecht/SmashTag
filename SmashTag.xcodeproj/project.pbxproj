@@ -11,7 +11,7 @@
 		8415B2001EC36DCD0006647B /* SearchWordMention.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8415B1FF1EC36DCD0006647B /* SearchWordMention.swift */; };
 		8415B2051EC3A1540006647B /* UITableViewDataSource+NSFetchedResultsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8415B2031EC3A1540006647B /* UITableViewDataSource+NSFetchedResultsController.swift */; };
 		8415B2061EC3A1540006647B /* FetchedResultsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8415B2041EC3A1540006647B /* FetchedResultsTableViewController.swift */; };
-		8415B20A1ECA36200006647B /* TweetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8415B2091ECA36200006647B /* TweetViewModel.swift */; };
+		8415B20A1ECA36200006647B /* TweetsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8415B2091ECA36200006647B /* TweetsViewModel.swift */; };
 		8462F26C1EB3EFE400EB648F /* ImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8462F26B1EB3EFE400EB648F /* ImageViewController.swift */; };
 		84A64FF11ECB87610053E465 /* SearchHistoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A64FF01ECB87610053E465 /* SearchHistoryViewModel.swift */; };
 		84A64FF51ECC9E800053E465 /* MentionsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A64FF41ECC9E800053E465 /* MentionsViewModel.swift */; };
@@ -32,6 +32,7 @@
 		84D9BC551EAE521600CCED2D /* SmashTagUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D9BC541EAE521600CCED2D /* SmashTagUITests.swift */; };
 		84D9BC631EAE526E00CCED2D /* TweetTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D9BC621EAE526E00CCED2D /* TweetTableViewController.swift */; };
 		84D9BC701EAE730500CCED2D /* TweetTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D9BC6F1EAE730500CCED2D /* TweetTableViewCell.swift */; };
+		84FD938E1ECE4BE00031F112 /* TweetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FD938D1ECE4BE00031F112 /* TweetViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,7 +57,7 @@
 		8415B1FF1EC36DCD0006647B /* SearchWordMention.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchWordMention.swift; sourceTree = "<group>"; };
 		8415B2031EC3A1540006647B /* UITableViewDataSource+NSFetchedResultsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITableViewDataSource+NSFetchedResultsController.swift"; sourceTree = "<group>"; };
 		8415B2041EC3A1540006647B /* FetchedResultsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FetchedResultsTableViewController.swift; sourceTree = "<group>"; };
-		8415B2091ECA36200006647B /* TweetViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TweetViewModel.swift; sourceTree = "<group>"; };
+		8415B2091ECA36200006647B /* TweetsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TweetsViewModel.swift; sourceTree = "<group>"; };
 		8462F26B1EB3EFE400EB648F /* ImageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageViewController.swift; sourceTree = "<group>"; };
 		84A64FF01ECB87610053E465 /* SearchHistoryViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchHistoryViewModel.swift; sourceTree = "<group>"; };
 		84A64FF41ECC9E800053E465 /* MentionsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MentionsViewModel.swift; sourceTree = "<group>"; };
@@ -83,6 +84,7 @@
 		84D9BC561EAE521600CCED2D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		84D9BC621EAE526E00CCED2D /* TweetTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TweetTableViewController.swift; sourceTree = "<group>"; };
 		84D9BC6F1EAE730500CCED2D /* TweetTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TweetTableViewCell.swift; sourceTree = "<group>"; };
+		84FD938D1ECE4BE00031F112 /* TweetViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TweetViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,9 +116,10 @@
 		8415B2071ECA2EF30006647B /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				8415B2091ECA36200006647B /* TweetViewModel.swift */,
+				8415B2091ECA36200006647B /* TweetsViewModel.swift */,
 				84A64FF01ECB87610053E465 /* SearchHistoryViewModel.swift */,
 				84A64FF41ECC9E800053E465 /* MentionsViewModel.swift */,
+				84FD938D1ECE4BE00031F112 /* TweetViewModel.swift */,
 			);
 			name = ViewModel;
 			sourceTree = "<group>";
@@ -378,7 +381,7 @@
 				84B2A4671EBCE08500B6516B /* SmashTagModel.xcdatamodeld in Sources */,
 				84B2A4841EBCF70400B6516B /* Tweet.swift in Sources */,
 				84D9BC351EAE521600CCED2D /* AppDelegate.swift in Sources */,
-				8415B20A1ECA36200006647B /* TweetViewModel.swift in Sources */,
+				8415B20A1ECA36200006647B /* TweetsViewModel.swift in Sources */,
 				8462F26C1EB3EFE400EB648F /* ImageViewController.swift in Sources */,
 				84B2A45B1EB91FC700B6516B /* ImageTableViewCell.swift in Sources */,
 				84A64FF11ECB87610053E465 /* SearchHistoryViewModel.swift in Sources */,
@@ -386,6 +389,7 @@
 				84B2A4611EB92FA000B6516B /* SearchHistory.swift in Sources */,
 				8415B2051EC3A1540006647B /* UITableViewDataSource+NSFetchedResultsController.swift in Sources */,
 				8415B2001EC36DCD0006647B /* SearchWordMention.swift in Sources */,
+				84FD938E1ECE4BE00031F112 /* TweetViewModel.swift in Sources */,
 				8415B2061EC3A1540006647B /* FetchedResultsTableViewController.swift in Sources */,
 				84A64FF51ECC9E800053E465 /* MentionsViewModel.swift in Sources */,
 				84C63EB11EAFA9BA007A344A /* MentionsTableViewController.swift in Sources */,

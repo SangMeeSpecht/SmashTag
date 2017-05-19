@@ -2,81 +2,77 @@
 //  TweetViewModel.swift
 //  SmashTag
 //
-//  Created by SangMee Specht on 5/15/17.
+//  Created by SangMee Specht on 5/18/17.
 //  Copyright © 2017 SangMee Specht. All rights reserved.
 //
 
 import Foundation
 import Twitter
 import UIKit
-import CoreData
 
 class TweetViewModel {
-    private var lastTwitterRequest: Twitter.Request?
-    var tweets = [Array<Twitter.Tweet>]() {
-        didSet {
-            DispatchQueue.main.async{
-                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "reloadTableData"), object: nil)
-            }
+    var tweet: Twitter.Tweet?
+    
+    private let mentionColors = [
+        "hashtags": UIColor.magenta,
+        "urls": UIColor.purple,
+        "userMentions": UIColor.green
+    ]
+    
+    private let oneDayOld: Double = 24 * 60 * 60
+    
+    init(tweet: Twitter.Tweet) {
+        self.tweet = tweet
+    }
+    
+    
+    func getColoredMentions() -> NSMutableAttributedString {
+        let attributedString = NSMutableAttributedString(string: (tweet?.text)!)
+        
+        attributedString.setMentionsColor(mentions: (tweet?.hashtags)!, color: mentionColors["hashtags"]!)
+        attributedString.setMentionsColor(mentions: (tweet?.urls)!, color: mentionColors["urls"]!)
+        attributedString.setMentionsColor(mentions: (tweet?.userMentions)!, color: mentionColors["userMentions"]!)
+        
+        return attributedString
+    }
+
+    func addCameraIcon() -> String {
+        var camera = ""
+        
+        for _ in (tweet?.media)! {
+            camera += "  📷"
         }
+        
+        return camera
     }
-    var container: NSPersistentContainer? = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer
-    var searchText: String? {
-        didSet {
-            removeAllTweets()
-            searchForTweets()
+    
+    func getScreenName() -> String {
+        return "\(tweet!.user)"
+    }
+    
+    func getTimeCreated() -> String {
+        let formatter = DateFormatter()
+        
+        if NSDate().timeIntervalSince((tweet?.created)!) > oneDayOld {
+            formatter.dateStyle = .short
+        } else {
+            formatter.timeStyle = .short
         }
+        
+        return formatter.string(from: tweet!.created)
     }
     
-    private var twitterRequest: Twitter.Request? {
-        if let query = searchText, !query.isEmpty {
-            return Twitter.Request(search: query + " -filter:retweets", count: 100)
-        }
-        return nil
-    }
-    
-    func tweetCount() -> Int {
-        return tweets.count
-    }
-    
-    func tweetsCount(in section: Int) -> Int {
-        return tweets[section].count
-    }
-    
-    func searchForTweets() {
-        if let request = twitterRequest {
-            lastTwitterRequest = request
-            request.fetchTweets { [weak self] newTweets in
-                DispatchQueue.main.async() {
-                    if request == self?.lastTwitterRequest {
-                        if !newTweets.isEmpty {
-                            self?.tweets.insert(newTweets, at: 0)
-                            self?.updateDatabase(newTweets: newTweets)
-                        }
-                    }
-                }
-            }
-        }
-    }
-    
-    private func updateDatabase(newTweets: [Twitter.Tweet]) {
-        container?.performBackgroundTask { context in
-            _ = try? SearchWord.findOrCreateSearchWord(matching: self.searchText!, in: context)
-            
-            for twitterInfo in newTweets {
-                _ = try? Tweet.findOrCreateTweet(matching: twitterInfo, searchWord: self.searchText!, in: context)
-            }
-            
-            try? context.save()
-        }
-    }
-    
-    private func removeAllTweets() {
-        tweets.removeAll()
-    }
-    
-    func getTweet(at index: IndexPath) -> Twitter.Tweet {
-        return tweets[index.section][index.row]
+    func getProfileImage() -> UIImage {
+        let profileImageURL = tweet?.user.profileImageURL
+        let imageData = try? Data(contentsOf: profileImageURL!)
+        return UIImage(data: imageData!)!
     }
 }
 
+private extension NSMutableAttributedString {
+    func setMentionsColor(mentions: [Mention], color: UIColor) {
+        for mention in mentions {
+            addAttribute(NSForegroundColorAttributeName, value: color, range: mention.nsrange)
+        }
+    }
+}
